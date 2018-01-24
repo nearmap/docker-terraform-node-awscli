@@ -12,4 +12,11 @@ RUN apk add --update git curl openssh && \
     unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip -d /bin && \
     rm -f terraform_${TERRAFORM_VERSION}_linux_amd64.zip
 
+RUN \
+  mkdir -p /aws && \
+  apk -Uuv add groff less python py-pip && \
+  pip install awscli && \
+  apk --purge -v del py-pip && \
+  rm /var/cache/apk/*
+
 CMD ["sh"]

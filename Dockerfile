@@ -7,7 +7,7 @@ ENV TERRAFORM_SHA256SUM=f728fa73ff2a4c4235a28de4019802531758c7c090b6ca4c024d4806
 RUN apk --update add bash build-base clang
 
 # Install common tools
-RUN apk --update jq git curl openssh
+RUN apk --update add jq git curl openssh
 
 # Install AWS-CLI
 RUN \

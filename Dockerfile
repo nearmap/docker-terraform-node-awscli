@@ -7,7 +7,7 @@ ENV TERRAFORM_SHA256SUM=9b9a4492738c69077b079e595f5b2a9ef1bc4e8fb5596610f69a6f32
 RUN apk --update add bash build-base clang
 
 # Install common tools
-RUN apk --update add jq git curl openssh zlib autoconf
+RUN apk --update add jq git curl openssh zlib autoconf zlib-dev alpine-sdk automake
 
 # Install AWS-CLI
 RUN \

@@ -9,12 +9,21 @@ RUN apk --update add bash build-base clang
 # Install common tools
 RUN apk --update add jq git curl openssh zlib autoconf zlib-dev alpine-sdk automake
 
+RUN echo "**** install Python ****" && \
+    apk add --no-cache python3 && \
+    if [ ! -e /usr/bin/python ]; then ln -sf python3 /usr/bin/python ; fi && \
+    \
+    echo "**** install pip ****" && \
+    python3 -m ensurepip && \
+    rm -r /usr/lib/python*/ensurepip && \
+    pip3 install --no-cache --upgrade pip setuptools wheel && \
+    if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi
+
 # Install AWS-CLI
 RUN \
   mkdir -p /aws && \
-  apk -Uuv add groff less python py-pip && \
-  pip install awscli && \
-  apk --purge -v del py-pip && \
+  apk -Uuv add groff less && \
+  pip3 install awscli doit && \
   rm /var/cache/apk/*
 
 # Install terraform
